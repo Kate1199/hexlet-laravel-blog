@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Article;
+use App\Http\Requests\StorePostRequest;
+use Illuminate\Support\Facades\Session;
 
 class ArticleController extends Controller
 {
@@ -31,20 +33,15 @@ class ArticleController extends Controller
     }
 
 
-    public function store(Request $request)
+    public function store(StorePostRequest $request)
     {
-        $data = $this->validate($request, [
-            'name' => 'required|unique:articles',
-            'body' => 'required|min:1000'
-        ]);
+        $data = $request->validated();
 
         $article = new Article();
         $article->fill($data);
         $article->save();
 
-        $request->session()->flash('flash_message', 'Страница добавлена');
-        return redirect()
-            ->route('articles.index');
+        Session::flash('flash_message', 'Страница добавлена');
     }
 
     public function edit($id)
@@ -53,19 +50,14 @@ class ArticleController extends Controller
         return view('article.edit', compact('article'));
     }
 
-    public function update(Request $request, $id)
+    public function update(StorePostRequest $request, $id)
     {
+        $data = $request->validated();
+
         $article = Article::findOrFail($id);
-
-        $data = $this->validate($request, [
-            'name' => 'required|unique:articles,name, ' . $article->id,
-            'body' => 'required|min:100'
-        ]);
-
         $article->fill($data);
         $article->save();
 
-        return redirect()
-            ->route('articles.index');
+        Session::flash('flash_message', 'Статья успешно обновлена');
     }
 }

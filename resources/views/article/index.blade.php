@@ -11,6 +11,7 @@
     @foreach ($articles as $article)
     <a href="{{ route('articles.show', ['id' => $article->id]) }}">
         <h2>{{$article->name}}</h2>
+        <a href="{{ route('articles.edit', ['id' => $article->id]) }}">Редактировать</a>
     </a>
         {{-- Str::limit – функция-хелпер, которая обрезает текст до указанной длины --}}
         {{-- Используется для очень длинных текстов, которые нужно сократить --}}
