@@ -46,4 +46,10 @@ class ArticleController extends Controller
         return redirect()
             ->route('articles.index');
     }
+
+    public function edit($id)
+    {
+        $article = Article::findOrFail($id);
+        return view('article.edit', compact('article'));
+    }
 }

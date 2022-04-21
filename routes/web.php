@@ -33,3 +33,6 @@ Route::post('articles/store', [ArticleController::class, 'store'])
 
 Route::get('articles/{id}', [ArticleController::class, 'show'])
     ->name('articles.show');
+
+Route::get('articles/{id}/edit', [ArticleController::class, 'edit'])
+    ->name('articles.edit');
