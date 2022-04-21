@@ -42,6 +42,8 @@ class ArticleController extends Controller
         $article->save();
 
         Session::flash('flash_message', 'Страница добавлена');
+        return redirect()
+        ->route('articles.index');
     }
 
     public function edit($id)
@@ -59,5 +61,22 @@ class ArticleController extends Controller
         $article->save();
 
         Session::flash('flash_message', 'Статья успешно обновлена');
+
+        return redirect()
+            ->route('articles.index');
+    }
+
+    public function destroy($id)
+    {
+        $article = Article::find($id);
+
+        if ($article) {
+            $article->delete();
+        }
+
+        Session::flash('flash_message', 'Статья удалена');
+
+        return redirect()
+            ->route('articles.index');
     }
 }
