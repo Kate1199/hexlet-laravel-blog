@@ -24,5 +24,7 @@ Route::get('team', [PageController::class, 'team']);
 
 Route::get('articles', [ArticleController::class, 'index'])
     ->name('articles.index');
+Route::get('aricles/create', 'ArticleController@create')
+    ->name('articles.create');
 Route::get('articles/{id}', [ArticleController::class, 'show'])
     ->name('articles.show');

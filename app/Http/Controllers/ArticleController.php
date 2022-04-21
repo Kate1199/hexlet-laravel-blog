@@ -22,4 +22,11 @@ class ArticleController extends Controller
 
         return view('article.show', compact('article'));
     }
+
+    public function create()
+    {
+        $article = new Article();
+
+        return view('article.create', compact('article'));
+    }
 }
