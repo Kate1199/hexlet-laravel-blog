@@ -24,7 +24,12 @@ Route::get('team', [PageController::class, 'team']);
 
 Route::get('articles', [ArticleController::class, 'index'])
     ->name('articles.index');
-Route::get('aricles/create', 'ArticleController@create')
+
+Route::get('articles/create', [ArticleController::class, 'create'])
     ->name('articles.create');
+
+Route::post('articles/store', [ArticleController::class, 'store'])
+    ->name('articles.store');
+
 Route::get('articles/{id}', [ArticleController::class, 'show'])
     ->name('articles.show');

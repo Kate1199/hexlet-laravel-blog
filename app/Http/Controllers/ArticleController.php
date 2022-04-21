@@ -29,4 +29,21 @@ class ArticleController extends Controller
 
         return view('article.create', compact('article'));
     }
+
+
+    public function store(Request $request)
+    {
+        $data = $this->validate($request, [
+            'name' => 'required|unique:articles',
+            'body' => 'required|min:1000'
+        ]);
+
+        $article = new Article();
+        $article->fill($data);
+        $article->save();
+
+        $request->session()->flash('flash_message', 'Страница добавлена');
+        return redirect()
+            ->route('articles.index');
+    }
 }
